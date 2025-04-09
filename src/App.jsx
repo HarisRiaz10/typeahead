@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -16,11 +17,15 @@ function App() {
       setLoading(true);
       setError('');
       try {
-        const response = await fetch(`http://127.0.0.1:3001/suggest?prefix=${query}`);
-        if (!response.ok) throw new Error('Failed to fetch suggestions');
-        
-        const data = await response.json();
-        setSuggestions(data);
+        // Making the request using axios
+        const response = await axios.get(`http://<YOUR_BACKEND_URL>:3001/suggest`, {
+          params: {
+            prefix: query,
+          },
+        });
+
+        // Handle the response data
+        setSuggestions(response.data);
       } catch (err) {
         console.error('Error fetching suggestions:', err);
         setError('Failed to load suggestions.');
