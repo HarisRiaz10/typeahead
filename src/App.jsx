@@ -18,7 +18,7 @@ function App() {
       setError('');
       try {
         // Making the request using axios
-        const response = await axios.get(`http://<YOUR_BACKEND_URL>:3001/suggest`, {
+        const response = await axios.get(`http://<YOUR_BACKEND_URL>/suggest`, {
           params: {
             prefix: query,
           },
